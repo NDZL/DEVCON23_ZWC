@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="3dp"
+    android:layout_marginRight="3dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5"
+        android:gravity="center"
+        android:text="HD POC LAUNCHER" android:textSize="20dp"/>
+
+    <Button
+        android:id="@+id/btn_STOREMANAGER"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        android:layout_weight="0.5"
+        android:onClick="onClickbtn_STOREMANAGER"
+        android:text="Store Manager" />
+    <Button
+        android:id="@+id/btn_OperatorOne"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        android:layout_weight="0.5"
+        android:onClick="onClickbtn_OperatorOne"
+        android:text="Receiving Area Operations" />
+    <Button
+        android:id="@+id/btn_OperatorTwo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        android:layout_weight="0.5"
+        android:onClick="onClickbtn_OperatorTwo"
+        android:text="Shipment Operations" />
+</LinearLayout>
+</ScrollView>
