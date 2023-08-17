@@ -3,7 +3,9 @@
 # DEVCON23_ZWC
 Sample code showing how to use some Large Screens APIs from Android and how to configure Zebra Workstation Connect at runtime.
 
-This app needs to be granted the permission to send ZWC configurations.
+Firstly install the ZWC driver found at https://www.zebra.com/us/en/support-downloads/software/productivity-apps/workstation-connect.html
+
+Secondly, this app needs to be granted the permission to send ZWC configurations.
 
 The easiest way to achieve that is through Stagenow, using the AccessManager Feature as shown below.
 
