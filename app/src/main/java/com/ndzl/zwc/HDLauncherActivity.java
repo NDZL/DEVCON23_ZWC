@@ -23,13 +23,10 @@ import java.io.InputStream;
 //import com.zebra.workstationconnect.IZVAService;
 //https://developer.android.com/reference/android/hardware/display/DisplayManager#registerDisplayListener(android.hardware.display.DisplayManager.DisplayListener,%20android.os.Handler)
 
-import com.zebra.valueadd.IZVAService;
-
 public class HDLauncherActivity extends AppCompatActivity  implements ServiceConnection {
 
     Intent starterIntent;
-    //private com.zebra.workstationconnect.IZVAService iServiceBinder;  //wsc <1.9
-    private com.zebra.valueadd.IZVAService iServiceBinder;
+    private com.zebra.workstationconnect.IZVAService iServiceBinder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,10 +80,6 @@ public class HDLauncherActivity extends AppCompatActivity  implements ServiceCon
         callProcessZVA("Config_DIMENSIONING.json");
     }
 
-    public void btClickHDReady(View v){
-
-    }
-
     void callProcessZVA(String jsonConfig){
         try {
             if (iServiceBinder != null) {
@@ -95,17 +88,14 @@ public class HDLauncherActivity extends AppCompatActivity  implements ServiceCon
                 String dataSet = loadJSONFromAsset( jsonConfig );
                 String response = iServiceBinder.processZVARequest(dataSet);
                 Log.i("callProcessZVA", "processZVARequest response=" + response);
-                makeText(this, "processZVARequest response=" + response, Toast.LENGTH_SHORT).show();
             } else {
                 Log.e("callProcessZVA", "res " + null);
                 makeText(this, "Not Connected", Toast.LENGTH_LONG).show();
             }
         } catch (Exception e) {
             e.printStackTrace();
-            makeText(this, "ZVA Excp \n"+e.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
-
 
 
     @Override
@@ -123,8 +113,7 @@ public class HDLauncherActivity extends AppCompatActivity  implements ServiceCon
     @Override
     public void onServiceConnected(ComponentName name, IBinder service) {
         Log.e("TAG", "res connecting");
-        //iServiceBinder = com.zebra.workstationconnect.IZVAService.Stub.asInterface(service);  //old interface
-        iServiceBinder = com.zebra.valueadd.IZVAService.Stub.asInterface(service);
+        iServiceBinder = com.zebra.workstationconnect.IZVAService.Stub.asInterface(service);
         Log.e("TAG", "res connected");
         makeText(this, "Connected", Toast.LENGTH_LONG).show();
     }
@@ -136,17 +125,10 @@ public class HDLauncherActivity extends AppCompatActivity  implements ServiceCon
 
     }
     String pkg="com.zebra.workstationconnect.release";
-    //TO BE USED FOR ZWC VERSIONS<1.9
-/*        private void bindtoZVAService() {
+    private void bindtoZVAService() {
         Log.v("#ZWC#",pkg);
         Intent intent = new Intent(pkg);
         intent.setClassName(pkg, "com.zebra.workstationconnect.developerservice.DeviceManagementService");
-        bindService(intent
-                , this, BIND_AUTO_CREATE);
-    }*/
-    private void bindtoZVAService() {
-        Intent intent = new Intent("com.zebra.workstationconnect.release");
-        intent.setClassName("com.zebra.workstationconnect.release", "com.zebra.workstationconnect.DeviceManagementService");
         bindService(intent
                 , this, BIND_AUTO_CREATE);
     }

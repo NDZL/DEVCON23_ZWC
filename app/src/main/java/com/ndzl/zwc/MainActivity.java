@@ -16,8 +16,6 @@ import android.content.pm.ResolveInfo;
 import android.hardware.display.DisplayManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.text.method.ScrollingMovementMethod;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
 import android.view.Menu;
@@ -50,9 +48,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         tvOut = findViewById(R.id.txtOut);
-        tvOut.setMovementMethod(new ScrollingMovementMethod());
         tvOut.setText( largeScreenInfo() );
-
         Log.i(TAG1, "onCreate");
         last_activity_state = "onCreate";
     }
@@ -131,8 +127,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-
     public void btClick_HDLauncher(View v) {
         //Launch on 2nd display if available
         ActivityOptions ao = ActivityOptions.makeBasic();
@@ -164,55 +158,11 @@ public class MainActivity extends AppCompatActivity {
         Display[] displays = displayManager.getDisplays();
         for (Display _d:displays) {
            _sb.append( "DISPLAY ID="+_d.getDisplayId()+" " ) ;
-           DisplayMetrics metrics = new DisplayMetrics();
-           _d.getRealMetrics(metrics);
-
-            String DISPMETRICS_DENSITY= ""+metrics.density;
-            String DISPMETRICS_DENSITY_DPI= ""+metrics.densityDpi;
-            String DISPMETRICS_SCALED_DENSITY= ""+metrics.scaledDensity;
-            String DISPMETRICS_X_DPI= ""+metrics.xdpi;
-            String DISPMETRICS_Y_DPI= ""+metrics.ydpi;
-            String DISPMETRICS_H_PIXEL= ""+metrics.heightPixels;
-            String DISPMETRICS_W_PIXEL= ""+metrics.widthPixels;
-
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                 _sb.append( _d.getDeviceProductInfo().getProductId()+"\n" ) ;
-                String PROD_ID=_d.getDeviceProductInfo().getProductId();
-                String PROD_INFO=_d.getDeviceProductInfo().getName();
-                String PROD_MANUF_PNPID=_d.getDeviceProductInfo().getManufacturerPnpId();
-                String PROD_SINKTYPE=""+_d.getDeviceProductInfo().getConnectionToSinkType();
-                String PROD_YEARWEEK=""+_d.getDeviceProductInfo().getManufactureYear()+"-"+_d.getDeviceProductInfo().getManufactureWeek();
-                String PROD_MODELYEAR=""+_d.getDeviceProductInfo().getModelYear();
-                _sb.append( "NAME="+_d.getName()+" " ) ;
-                _sb.append( "PROD_ID="+ PROD_ID +" " ) ;
-                _sb.append( "PROD_INFO="+ PROD_INFO +" " ) ;
-                _sb.append( "PROD_MANUF_PNPID="+ PROD_MANUF_PNPID +" " ) ;
-                _sb.append( "PROD_SINKTYPE="+ PROD_SINKTYPE +" " ) ;
-                _sb.append( "PROD_YEARWEEK="+ PROD_YEARWEEK +" " ) ;
-                _sb.append( "PROD_MODELYEAR="+ PROD_MODELYEAR +" " ) ;
             }
-            _sb.append("\n");
+            _sb.append( "NAME="+_d.getName()+" " ) ;
 
-            /*
-            DisplayMetrics metrics = getResources().getDisplayMetrics();
-            String DISPMETRICS_DENSITY= ""+metrics.density;
-            String DISPMETRICS_DENSITY_DPI= ""+metrics.densityDpi;
-            String DISPMETRICS_SCALED_DENSITY= ""+metrics.scaledDensity;
-            String DISPMETRICS_X_DPI= ""+metrics.xdpi;
-            String DISPMETRICS_Y_DPI= ""+metrics.ydpi;
-            String DISPMETRICS_H_PIXEL= ""+metrics.heightPixels;
-            String DISPMETRICS_W_PIXEL= ""+metrics.widthPixels;
-
-             */
-
-
-            _sb.append( "DISPMETRICS_DENSITY="+ DISPMETRICS_DENSITY +" " ) ;
-            _sb.append( "DISPMETRICS_DENSITY_DPI="+ DISPMETRICS_DENSITY_DPI +" " ) ;
-            _sb.append( "DISPMETRICS_SCALED_DENSITY="+ DISPMETRICS_SCALED_DENSITY +" " ) ;
-            _sb.append( "DISPMETRICS_X_DPI="+ DISPMETRICS_X_DPI +" " ) ;
-            _sb.append( "DISPMETRICS_Y_DPI="+ DISPMETRICS_Y_DPI +" " ) ;
-            _sb.append( "DISPMETRICS_H_PIXEL="+ DISPMETRICS_H_PIXEL +" " ) ;
-            _sb.append( "DISPMETRICS_W_PIXEL="+ DISPMETRICS_W_PIXEL +" " ) ;
             _sb.append("\n");
         }
 
@@ -222,7 +172,6 @@ public class MainActivity extends AppCompatActivity {
         _sb.append("\n");
         WindowMetrics maximumWindowMetrics = getWindowManager().getMaximumWindowMetrics();
         WindowMetrics windowMetrics = getWindowManager().getCurrentWindowMetrics();
-
         _sb.append( "METRICS MAX="+maximumWindowMetrics.getBounds().width()+"x"+maximumWindowMetrics.getBounds().height()+"\n" ) ;
         _sb.append( "METRICS CURRENT="+windowMetrics.getBounds().width()+"x"+windowMetrics.getBounds().height()+"\n" ) ;
         _sb.append("\n");
