@@ -14,6 +14,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.hardware.display.DisplayManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -88,7 +89,31 @@ public class MainActivity extends AppCompatActivity {
         last_activity_state = "onDestroy";
     }
 
+    public void buttonVideosClick(View v) {
+        ActivityOptions ao = ActivityOptions.makeBasic();
 
+        int cur_display = getDisplay().getDisplayId();
+        int other_display = -1;
+        DisplayManager displayManager = (DisplayManager) getSystemService(Context.DISPLAY_SERVICE);
+        Display[] displays = displayManager.getDisplays();
+        for (Display _d:displays) {
+            if(_d.getDisplayId() != cur_display) {
+                other_display = _d.getDisplayId();
+                break;
+            }
+        }
+
+        if(other_display>-1) {
+            ao.setLaunchDisplayId(other_display);
+            Bundle bao = ao.toBundle();
+            Intent i = new Intent();
+            i.setPackage("com.android.chrome");
+            i.setAction(Intent.ACTION_VIEW);
+            i.setData(Uri.parse("https://videos.homedepot.com/"));
+            //these flags might help //i.setFlags(Intent.FLAG_ACTIVITY_LAUNCH_ADJACENT | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(i, bao);
+        }
+    }
 
     public void bt1click(View v) {
         ActivityOptions ao = ActivityOptions.makeBasic();
