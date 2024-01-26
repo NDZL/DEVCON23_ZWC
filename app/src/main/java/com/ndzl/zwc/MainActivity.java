@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
             i.setPackage("com.android.chrome");
             i.setAction(Intent.ACTION_VIEW);
             i.setData(Uri.parse("https://videos.homedepot.com/"));
-            //these flags might help //i.setFlags(Intent.FLAG_ACTIVITY_LAUNCH_ADJACENT | Intent.FLAG_ACTIVITY_NEW_TASK);
+            //--these flags might help //i.setFlags(Intent.FLAG_ACTIVITY_LAUNCH_ADJACENT | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(i, bao);
         }
     }
